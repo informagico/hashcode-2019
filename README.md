@@ -1,1 +1,4 @@
-# hashcode-2019
+# Google HashCode 2019
+
+## **Team:** Tree Fins
+## **Final Score:** TBA
