@@ -9,11 +9,20 @@ namespace hashcode19
         class InputElement
         {
             // properties
+            char orientation = '-';
+            int count = 0;
+
+            List<string> tags = new List<string>();
 
             // constructor
             public InputElement(string rawString)
             {
                 // parse raw string
+                string[] splitted = rawString.Split(' ');
+                this.orientation = Convert.ToChar(splitted[0]);
+                this.count = Convert.ToInt32(splitted[1]);
+                for (int i = 0; i < Convert.ToInt32(splitted[1]); i++)
+                    this.tags.Add(splitted[2 + i]);
             }
         }
 
@@ -21,14 +30,20 @@ namespace hashcode19
         {
             private string filePath = String.Empty;
 
-            public List<InputElement> elements = new List<InputElement>();
+            public int count = 0;
 
             public Inputs(string filePath)
             {
                 this.filePath = filePath;
 
-                foreach (string row in new StreamReader(filePath).ReadToEnd().Trim().Split('\n'))
-                    this.elements.Add(new InputElement(row));
+                List<InputElement> elements = new List<InputElement>();
+
+                string[] rows = new StreamReader(filePath).ReadToEnd().Trim().Split('\n');
+
+                this.count = Convert.ToInt32(rows[0]);
+
+                for (int i = 1; i < rows.Length; i++)
+                    elements.Add(new InputElement(rows[i]));
             }
 
             public void SaveToFile()
